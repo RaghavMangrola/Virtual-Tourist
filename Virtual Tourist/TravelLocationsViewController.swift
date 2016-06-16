@@ -90,9 +90,11 @@ extension TravelLocationsViewController {
   }
   
   func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-    let annotation = view.annotation
+    let annotation = view.annotation as! Pin
     if editMode {
-      mapView.removeAnnotation(annotation!)
+      mapView.removeAnnotation(annotation)
+      stack.context.deleteObject(annotation)
+      stack.save()
     }
   }
 }
