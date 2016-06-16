@@ -22,6 +22,7 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
   }
   
   var editMode = false
+  let stack = CoreDataStack.sharedInstance
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,10 +38,12 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     if gestureRecognizer.state == UIGestureRecognizerState.Began && !editMode {
       let point = gestureRecognizer.locationInView(mapView)
       let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
+      let latitude = coordinate.latitude
+      let longitude = coordinate.longitude
       
-      let annotation = MKPointAnnotation()
-      annotation.coordinate = coordinate
+      let annotation = Pin(latitude: latitude, longitude: longitude, context: stack.context)
       mapView.addAnnotation(annotation)
+      stack.save()
     }
   }
   
