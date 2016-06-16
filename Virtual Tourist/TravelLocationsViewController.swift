@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDelegate {
   
@@ -32,6 +33,8 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(TravelLocationsViewController.addPinToMap(_:)))
     lpgr.delegate = self
     self.mapView.addGestureRecognizer(lpgr)
+    
+    loadPinsFromDatabase()
   }
   
   func addPinToMap(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -53,6 +56,22 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     UIView.animateWithDuration(0.3) {
       self.labelStackView.hidden = status
     }
+  }
+  
+  func loadPinsFromDatabase() {
+    var pins = [Pin]()
+    let fetchRequest = NSFetchRequest(entityName: "Pin")
+    
+    do {
+      let results = try stack.context.executeFetchRequest(fetchRequest)
+      if let results = results as? [Pin] {
+        pins = results
+      }
+    } catch {
+      print("Couldn't find any Pins")
+    }
+    print(pins)
+    mapView.addAnnotations(pins)
   }
   
 }

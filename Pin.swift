@@ -26,5 +26,4 @@ class Pin: NSManagedObject, MKAnnotation {
       fatalError("Unable to find Entity name!")
     }
   }
-
 }
