@@ -13,6 +13,9 @@
 		A0B939B11D0356930063A7E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0B939B01D0356930063A7E3 /* Assets.xcassets */; };
 		A0B939B41D0356930063A7E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0B939B21D0356930063A7E3 /* LaunchScreen.storyboard */; };
 		A0E7189A1D134C7300679FD4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E718991D134C7300679FD4 /* CoreDataStack.swift */; };
+		A0E7189D1D134DF300679FD4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0E7189B1D134DF300679FD4 /* Model.xcdatamodeld */; };
+		A0E718A41D134E9200679FD4 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E718A21D134E9200679FD4 /* Pin+CoreDataProperties.swift */; };
+		A0E718A51D134E9200679FD4 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E718A31D134E9200679FD4 /* Pin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		A0B939B31D0356930063A7E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0B939B51D0356930063A7E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0E718991D134C7300679FD4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = ../../../../../Desktop/CoreDataStack.swift; sourceTree = "<group>"; };
+		A0E7189C1D134DF300679FD4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A0E718A21D134E9200679FD4 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "../Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A0E718A31D134E9200679FD4 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pin.swift; path = ../Pin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,26 @@
 		A0B939A81D0356930063A7E3 /* Virtual Tourist */ = {
 			isa = PBXGroup;
 			children = (
+				A0E718A61D134F0A00679FD4 /* Model */,
 				A0B939A91D0356930063A7E3 /* AppDelegate.swift */,
 				A0B939AB1D0356930063A7E3 /* TravelLocationsViewController.swift */,
-				A0E718991D134C7300679FD4 /* CoreDataStack.swift */,
 				A0B939AD1D0356930063A7E3 /* Main.storyboard */,
 				A0B939B01D0356930063A7E3 /* Assets.xcassets */,
 				A0B939B21D0356930063A7E3 /* LaunchScreen.storyboard */,
 				A0B939B51D0356930063A7E3 /* Info.plist */,
 			);
 			path = "Virtual Tourist";
+			sourceTree = "<group>";
+		};
+		A0E718A61D134F0A00679FD4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A0E718A21D134E9200679FD4 /* Pin+CoreDataProperties.swift */,
+				A0E718A31D134E9200679FD4 /* Pin.swift */,
+				A0E718991D134C7300679FD4 /* CoreDataStack.swift */,
+				A0E7189B1D134DF300679FD4 /* Model.xcdatamodeld */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +158,9 @@
 				A0E7189A1D134C7300679FD4 /* CoreDataStack.swift in Sources */,
 				A0B939AC1D0356930063A7E3 /* TravelLocationsViewController.swift in Sources */,
 				A0B939AA1D0356930063A7E3 /* AppDelegate.swift in Sources */,
+				A0E718A51D134E9200679FD4 /* Pin.swift in Sources */,
+				A0E718A41D134E9200679FD4 /* Pin+CoreDataProperties.swift in Sources */,
+				A0E7189D1D134DF300679FD4 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +313,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A0E7189B1D134DF300679FD4 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A0E7189C1D134DF300679FD4 /* Model.xcdatamodel */,
+			);
+			currentVersion = A0E7189C1D134DF300679FD4 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A0B9399E1D0356930063A7E3 /* Project object */;
 }
