@@ -12,6 +12,7 @@
 		A0B939AF1D0356930063A7E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0B939AD1D0356930063A7E3 /* Main.storyboard */; };
 		A0B939B11D0356930063A7E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0B939B01D0356930063A7E3 /* Assets.xcassets */; };
 		A0B939B41D0356930063A7E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0B939B21D0356930063A7E3 /* LaunchScreen.storyboard */; };
+		A0E7189A1D134C7300679FD4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E718991D134C7300679FD4 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		A0B939B01D0356930063A7E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0B939B31D0356930063A7E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0B939B51D0356930063A7E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0E718991D134C7300679FD4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = ../../../../../Desktop/CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				A0B939A91D0356930063A7E3 /* AppDelegate.swift */,
 				A0B939AB1D0356930063A7E3 /* TravelLocationsViewController.swift */,
+				A0E718991D134C7300679FD4 /* CoreDataStack.swift */,
 				A0B939AD1D0356930063A7E3 /* Main.storyboard */,
 				A0B939B01D0356930063A7E3 /* Assets.xcassets */,
 				A0B939B21D0356930063A7E3 /* LaunchScreen.storyboard */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E7189A1D134C7300679FD4 /* CoreDataStack.swift in Sources */,
 				A0B939AC1D0356930063A7E3 /* TravelLocationsViewController.swift in Sources */,
 				A0B939AA1D0356930063A7E3 /* AppDelegate.swift in Sources */,
 			);
