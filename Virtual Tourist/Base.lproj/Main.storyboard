@@ -96,8 +96,24 @@
                     <view key="view" contentMode="scaleToFill" id="Vye-dC-OCc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BaD-hM-sjD">
+                                <rect key="frame" x="0.0" y="64" width="600" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="1X2-aK-OSx"/>
+                                </constraints>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="BaD-hM-sjD" secondAttribute="trailing" id="4bB-vK-Knt"/>
+                            <constraint firstItem="BaD-hM-sjD" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="bbo-ko-V6D"/>
+                            <constraint firstItem="BaD-hM-sjD" firstAttribute="top" secondItem="URQ-nn-7Gn" secondAttribute="bottom" id="z2a-99-1tl"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="BaD-hM-sjD" id="KlX-kg-Zo3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Kh-oE-YqR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

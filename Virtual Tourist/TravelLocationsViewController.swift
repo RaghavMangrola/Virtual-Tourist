@@ -102,15 +102,9 @@ extension TravelLocationsViewController {
       mapView.removeAnnotation(annotation)
       stack.context.deleteObject(annotation)
       stack.save()
-    }
-  }
-  
-  func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
-    if !editMode {
-      let annotation = view.annotation as! Pin
+    } else {
       performSegueWithIdentifier("pinTapped", sender: annotation)
     }
   }
-  
 }
 
