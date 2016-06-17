@@ -14,7 +14,6 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
   
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var editButton: UIBarButtonItem!
-  @IBOutlet weak var deleteLabel: UILabel!
   @IBOutlet weak var labelStackView: UIStackView!
   
   
@@ -74,6 +73,14 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     mapView.addAnnotations(pins)
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "pinTapped" {
+      let photosVC = segue.destinationViewController as! PhotosViewController
+      let annotation = sender as! Pin
+      photosVC.annotation = annotation
+      
+    }
+  }
 }
 
 // MARK: MKMapViewDelegate
@@ -97,5 +104,13 @@ extension TravelLocationsViewController {
       stack.save()
     }
   }
+  
+  func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
+    if !editMode {
+      let annotation = view.annotation as! Pin
+      performSegueWithIdentifier("pinTapped", sender: annotation)
+    }
+  }
+  
 }
 
