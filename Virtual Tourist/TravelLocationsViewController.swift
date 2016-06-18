@@ -69,7 +69,6 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     } catch {
       print("Couldn't find any Pins")
     }
-    print(pins)
     mapView.addAnnotations(pins)
   }
   
@@ -106,5 +105,6 @@ extension TravelLocationsViewController {
       performSegueWithIdentifier("pinTapped", sender: annotation)
     }
   }
+  
 }
 
