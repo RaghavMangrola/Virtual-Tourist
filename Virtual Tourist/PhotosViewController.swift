@@ -13,10 +13,15 @@ class PhotosViewController: UIViewController, MKMapViewDelegate {
 
   @IBOutlet weak var mapView: MKMapView!
   var annotation: Pin!
+  let flickrClientInstance = FlickrClient.sharedInstance
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMapView()
+    flickrClientInstance.searchPhotos("\(annotation.latitude)", longitude: "\(annotation.longitude)") { _ in
+      
+    }
+    
   }
   
   func setupMapView() {
