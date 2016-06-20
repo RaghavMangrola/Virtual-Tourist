@@ -6,7 +6,7 @@
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Pin" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="Photos" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="Pin" positionX="-63" positionY="-18" width="128" height="75"/>
     </elements>
 </model>

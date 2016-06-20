@@ -21,7 +21,6 @@ class PhotosViewController: UIViewController, MKMapViewDelegate {
     flickrClientInstance.searchPhotos("\(annotation.latitude)", longitude: "\(annotation.longitude)") { _ in
       
     }
-    
   }
   
   func setupMapView() {

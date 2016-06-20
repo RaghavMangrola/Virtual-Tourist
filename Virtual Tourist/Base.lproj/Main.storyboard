@@ -103,10 +103,39 @@
                                     <constraint firstAttribute="height" constant="125" id="1X2-aK-OSx"/>
                                 </constraints>
                             </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Kh-EZ-9UR">
+                                <rect key="frame" x="0.0" y="189" width="600" height="411"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3fq-G9-gsc">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="r5B-V9-Ae3">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLx-hu-ymS">
+                                                    <rect key="frame" x="-90" y="-44" width="240" height="128"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="iEW-LM-OTg" firstAttribute="top" secondItem="7Kh-EZ-9UR" secondAttribute="bottom" id="38c-52-OwF"/>
                             <constraint firstAttribute="trailing" secondItem="BaD-hM-sjD" secondAttribute="trailing" id="4bB-vK-Knt"/>
+                            <constraint firstAttribute="trailing" secondItem="7Kh-EZ-9UR" secondAttribute="trailing" id="DLb-Rt-Moi"/>
+                            <constraint firstItem="7Kh-EZ-9UR" firstAttribute="top" secondItem="BaD-hM-sjD" secondAttribute="bottom" id="DTS-V0-kMw"/>
+                            <constraint firstItem="7Kh-EZ-9UR" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="KaD-NW-bR9"/>
                             <constraint firstItem="BaD-hM-sjD" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="bbo-ko-V6D"/>
                             <constraint firstItem="BaD-hM-sjD" firstAttribute="top" secondItem="URQ-nn-7Gn" secondAttribute="bottom" id="z2a-99-1tl"/>
                         </constraints>

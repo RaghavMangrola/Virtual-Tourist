@@ -12,13 +12,15 @@ class FlickrClient: NSObject {
   var session = NSURLSession.sharedSession()
   static let sharedInstance = FlickrClient()
   
-  func taskForGetMethod(parameters parameters: [String:AnyObject], completionHandlerForGET: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionTask {
+  func taskForGetMethod(parameters parameters: [String:AnyObject], completionHandlerForGET: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
     
     var parameters = parameters
     
     parameters[ParameterKeys.Extras] = ParameterValues.MediumURL
     parameters[ParameterKeys.APIKey] = APIKeys.flickr
     parameters[ParameterKeys.Format] = ParameterValues.ResponseFormat
+    parameters[ParameterKeys.NoJSONCallback] = ParameterValues.DisableJSONCallback
+    
     
     let request = NSMutableURLRequest(URL: flickrURLFromParameters(parameters))
     print(request)
@@ -44,7 +46,7 @@ class FlickrClient: NSObject {
         sendError("No data was returned by the request!")
         return
       }
-
+      
       self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
     }
     

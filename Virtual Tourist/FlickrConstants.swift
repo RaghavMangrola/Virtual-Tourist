@@ -26,14 +26,22 @@ extension FlickrClient {
     static let APIKey = "api_key"
     static let Method = "method"
     static let Format = "format"
+    static let NoJSONCallback = "nojsoncallback"
   }
   
   struct ParameterValues {
     static let MediumURL = "url_m"
     static let ResponseFormat = "json"
+    static let DisableJSONCallback = "1"
   }
   
   struct APIKeys {
     static let flickr = "1868dbf6e3c44432d506f2145b446dff"
+  }
+  
+  struct JSONResponseKeys {
+    static let PhotosDictionary = "photos"
+    static let PhotosArray = "photo"
+    static let Image = "url_m"
   }
 }
