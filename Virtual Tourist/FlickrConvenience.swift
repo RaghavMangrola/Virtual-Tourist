@@ -9,7 +9,7 @@
 import Foundation
 
 extension FlickrClient {
-  func searchPhotos(latitude: String, longitude: String, completionHandlerForSearchPhotos: (success: Bool, error: NSError?) -> Void) {
+  func searchPhotos(latitude: String, longitude: String, completionHandlerForSearchPhotos: (photoURLS: [String]?, error: NSError?) -> Void) {
     let parameters = [
       FlickrClient.ParameterKeys.Method: FlickrClient.Methods.SearchPhotos,
       FlickrClient.ParameterKeys.Latitude: latitude,
@@ -18,15 +18,22 @@ extension FlickrClient {
     
     taskForGetMethod(parameters: parameters) { result, error in
       if let error = error {
-        completionHandlerForSearchPhotos(success: false, error: error)
+        completionHandlerForSearchPhotos(photoURLS: nil, error: error)
       } else {
         if let photosDictionary = result[FlickrClient.JSONResponseKeys.PhotosDictionary] as? [String:AnyObject],
           photosArray = photosDictionary[FlickrClient.JSONResponseKeys.PhotosArray] as? [[String:AnyObject]] {
           
+          var photoURLS = [String]()
           
-          completionHandlerForSearchPhotos(success: true, error: nil)
+          for photo in photosArray {
+            if let photoURL = photo[FlickrClient.JSONResponseKeys.MediumURL] as? String {
+              photoURLS.append(photoURL)
+            }
+            completionHandlerForSearchPhotos(photoURLS: photoURLS, error: nil)
+          }
+          
         } else {
-          completionHandlerForSearchPhotos(success: false, error: NSError(domain: "searchPhotos", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse info"]))
+          completionHandlerForSearchPhotos(photoURLS: nil, error: NSError(domain: "searchPhotos", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse info"]))
         }
       }
     }

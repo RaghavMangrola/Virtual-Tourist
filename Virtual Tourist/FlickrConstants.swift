@@ -42,6 +42,6 @@ extension FlickrClient {
   struct JSONResponseKeys {
     static let PhotosDictionary = "photos"
     static let PhotosArray = "photo"
-    static let Image = "url_m"
+    static let MediumURL = "url_m"
   }
 }
