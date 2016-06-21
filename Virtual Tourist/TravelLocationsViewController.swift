@@ -76,7 +76,7 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     if segue.identifier == "pinTapped" {
       let photosVC = segue.destinationViewController as! PhotosViewController
       let annotation = sender as! Pin
-      photosVC.annotation = annotation
+      photosVC.pin = annotation
       
     }
   }
@@ -102,6 +102,7 @@ extension TravelLocationsViewController: MKMapViewDelegate  {
       stack.context.deleteObject(annotation)
       stack.save()
     } else {
+      mapView.deselectAnnotation(annotation, animated: false)
       performSegueWithIdentifier("pinTapped", sender: annotation)
     }
   }

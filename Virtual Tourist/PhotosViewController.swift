@@ -13,16 +13,15 @@ import CoreData
 class PhotosViewController: UIViewController {
 
   @IBOutlet weak var mapView: MKMapView!
-  
   @IBOutlet weak var collectionView: UICollectionView!
-
   @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
   
-  var annotation: Pin!
-  var fetchedResultsController: NSFetchedResultsController!
   let flickrClientInstance = FlickrClient.sharedInstance
   let stack = CoreDataStack.sharedInstance
-    
+  
+  var pin: Pin!
+  var fetchedResultsController: NSFetchedResultsController!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMapView()
@@ -34,8 +33,8 @@ class PhotosViewController: UIViewController {
   }
   
   func setupMapView() {
-    mapView.addAnnotation(annotation)
-    mapView.camera.centerCoordinate = CLLocationCoordinate2DMake(annotation.latitude, annotation.longitude)
+    mapView.addAnnotation(pin)
+    mapView.camera.centerCoordinate = CLLocationCoordinate2DMake(pin.latitude, pin.longitude)
     mapView.camera.altitude = 10000
   }
   
@@ -50,7 +49,7 @@ class PhotosViewController: UIViewController {
     
     let fr = NSFetchRequest(entityName: "Photo")
     fr.sortDescriptors = []
-    fr.predicate = NSPredicate(format: "pin = %@", annotation)
+    fr.predicate = NSPredicate(format: "pin = %@", pin)
     fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
     fetchedResultsController.delegate = self
     
@@ -62,12 +61,11 @@ class PhotosViewController: UIViewController {
     } catch {
       print("Error while trying to fetch photos.")
     }
-    
     return photos
   }
   
   func searchPhotos() {
-    flickrClientInstance.searchPhotos("\(annotation.latitude)", longitude: "\(annotation.longitude)") { photoURLS, error in
+    flickrClientInstance.searchPhotos("\(pin.latitude)", longitude: "\(pin.longitude)") { photoURLS, error in
       guard let photoURLS = photoURLS else {
         return
       }
@@ -79,7 +77,7 @@ class PhotosViewController: UIViewController {
     dispatch_async(dispatch_get_main_queue()) {
       for photoURL in photoURLS {
         let photo = Photo(imageURL: photoURL, context: self.stack.context)
-        photo.pin = self.annotation
+        photo.pin = self.pin
       }
       self.stack.save()
     }
@@ -128,8 +126,6 @@ extension PhotosViewController: UICollectionViewDataSource {
     
     return cell
   }
-  
-  
 }
 
 extension PhotosViewController: NSFetchedResultsControllerDelegate {
