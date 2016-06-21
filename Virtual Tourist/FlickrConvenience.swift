@@ -30,9 +30,8 @@ extension FlickrClient {
             if let photoURL = photo[FlickrClient.JSONResponseKeys.MediumURL] as? String {
               photoURLS.append(photoURL)
             }
-            completionHandlerForSearchPhotos(photoURLS: photoURLS, error: nil)
           }
-          
+          completionHandlerForSearchPhotos(photoURLS: photoURLS, error: nil)
         } else {
           completionHandlerForSearchPhotos(photoURLS: nil, error: NSError(domain: "searchPhotos", code: 1, userInfo: [NSLocalizedDescriptionKey: "Failed to parse info"]))
         }
