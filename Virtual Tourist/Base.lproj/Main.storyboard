@@ -142,11 +142,19 @@
                                     <outlet property="delegate" destination="ET6-8a-Ui2" id="IV3-a4-0ry"/>
                                 </connections>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fw-ef-dX1">
+                                <rect key="frame" x="233" y="329" width="135" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iEW-LM-OTg" firstAttribute="top" secondItem="7Kh-EZ-9UR" secondAttribute="bottom" id="38c-52-OwF"/>
+                            <constraint firstItem="iEW-LM-OTg" firstAttribute="top" secondItem="1fw-ef-dX1" secondAttribute="bottom" constant="250" id="48F-cv-5so"/>
                             <constraint firstAttribute="trailing" secondItem="BaD-hM-sjD" secondAttribute="trailing" id="4bB-vK-Knt"/>
+                            <constraint firstItem="1fw-ef-dX1" firstAttribute="centerX" secondItem="Vye-dC-OCc" secondAttribute="centerX" id="80b-kv-h2h"/>
                             <constraint firstAttribute="trailing" secondItem="7Kh-EZ-9UR" secondAttribute="trailing" id="DLb-Rt-Moi"/>
                             <constraint firstItem="7Kh-EZ-9UR" firstAttribute="top" secondItem="BaD-hM-sjD" secondAttribute="bottom" id="DTS-V0-kMw"/>
                             <constraint firstItem="7Kh-EZ-9UR" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="KaD-NW-bR9"/>
@@ -158,6 +166,7 @@
                         <outlet property="collectionView" destination="7Kh-EZ-9UR" id="Mh6-34-cnm"/>
                         <outlet property="collectionViewFlowLayout" destination="3fq-G9-gsc" id="7gV-Ve-R62"/>
                         <outlet property="mapView" destination="BaD-hM-sjD" id="KlX-kg-Zo3"/>
+                        <outlet property="noImagesFoundLabel" destination="1fw-ef-dX1" id="kde-ao-UXr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Kh-oE-YqR" userLabel="First Responder" sceneMemberID="firstResponder"/>

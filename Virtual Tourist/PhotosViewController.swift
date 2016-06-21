@@ -15,6 +15,7 @@ class PhotosViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+  @IBOutlet weak var noImagesFoundLabel: UILabel!
   
   let flickrClientInstance = FlickrClient.sharedInstance
   let stack = CoreDataStack.sharedInstance
