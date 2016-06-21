@@ -103,8 +103,9 @@
                                     <constraint firstAttribute="height" constant="125" id="1X2-aK-OSx"/>
                                 </constraints>
                             </mapView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Kh-EZ-9UR" customClass="PhotoCollectionView" customModule="Virtual_Tourist" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Kh-EZ-9UR">
                                 <rect key="frame" x="0.0" y="189" width="600" height="411"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3fq-G9-gsc">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -119,14 +120,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLx-hu-ymS">
-                                                    <rect key="frame" x="-90" y="-44" width="240" height="128"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cLx-hu-ymS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="cLx-hu-ymS" secondAttribute="trailing" id="9i6-Js-TFa"/>
+                                            <constraint firstAttribute="bottom" secondItem="cLx-hu-ymS" secondAttribute="bottom" id="Bqw-EU-CIg"/>
+                                            <constraint firstItem="cLx-hu-ymS" firstAttribute="top" secondItem="r5B-V9-Ae3" secondAttribute="top" id="Yis-mm-SAJ"/>
+                                            <constraint firstItem="cLx-hu-ymS" firstAttribute="leading" secondItem="r5B-V9-Ae3" secondAttribute="leading" id="bO5-rs-udt"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="cLx-hu-ymS" id="sHQ-vW-Chr"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="ET6-8a-Ui2" id="u3K-Zs-ggq"/>
+                                    <outlet property="delegate" destination="ET6-8a-Ui2" id="IV3-a4-0ry"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -141,6 +155,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="7Kh-EZ-9UR" id="Mh6-34-cnm"/>
+                        <outlet property="collectionViewFlowLayout" destination="3fq-G9-gsc" id="7gV-Ve-R62"/>
                         <outlet property="mapView" destination="BaD-hM-sjD" id="KlX-kg-Zo3"/>
                     </connections>
                 </viewController>

@@ -9,6 +9,7 @@
 import Foundation
 
 extension FlickrClient {
+  
   func searchPhotos(latitude: String, longitude: String, completionHandlerForSearchPhotos: (photoURLS: [String]?, error: NSError?) -> Void) {
     let parameters = [
       FlickrClient.ParameterKeys.Method: FlickrClient.Methods.SearchPhotos,
@@ -37,5 +38,25 @@ extension FlickrClient {
         }
       }
     }
+  }
+  
+  func downloadPhotofromURL(photoURL: String, completionHandlerForDownloadPhotoFromURL: (imageData: NSData?, error: NSError?) -> Void) -> NSURLSessionTask {
+    let url = NSURL(string: photoURL)
+    let request = NSURLRequest(URL: url!)
+    
+    let task = session.dataTaskWithRequest(request){ data, response, error in
+      
+      guard let data = data else {
+        completionHandlerForDownloadPhotoFromURL(imageData: nil, error: NSError(domain: "downloadPhotoFromURL", code: 1, userInfo: [NSLocalizedDescriptionKey: "Couldn't download image"]))
+        return
+      }
+      
+      completionHandlerForDownloadPhotoFromURL(imageData: data, error: nil)
+      
+    }
+    
+    task.resume()
+    
+    return task
   }
 }

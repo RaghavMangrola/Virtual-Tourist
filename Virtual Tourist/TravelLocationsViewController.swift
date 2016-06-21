@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDelegate {
+class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate {
   
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var editButton: UIBarButtonItem!
@@ -84,7 +84,7 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
 
 // MARK: MKMapViewDelegate
 
-extension TravelLocationsViewController {
+extension TravelLocationsViewController: MKMapViewDelegate  {
   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
     let reuseId = "pin"
     
