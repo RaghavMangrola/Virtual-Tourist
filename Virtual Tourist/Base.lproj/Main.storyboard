@@ -103,16 +103,76 @@
                                     <constraint firstAttribute="height" constant="125" id="1X2-aK-OSx"/>
                                 </constraints>
                             </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Kh-EZ-9UR">
+                                <rect key="frame" x="0.0" y="189" width="600" height="411"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3fq-G9-gsc">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="r5B-V9-Ae3" customClass="PhotoViewCell" customModule="Virtual_Tourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cLx-hu-ymS">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nGd-fS-Q94">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="nGd-fS-Q94" firstAttribute="centerX" secondItem="r5B-V9-Ae3" secondAttribute="centerX" id="1Kp-vh-yL4"/>
+                                            <constraint firstAttribute="trailing" secondItem="cLx-hu-ymS" secondAttribute="trailing" id="9i6-Js-TFa"/>
+                                            <constraint firstAttribute="bottom" secondItem="cLx-hu-ymS" secondAttribute="bottom" id="Bqw-EU-CIg"/>
+                                            <constraint firstItem="cLx-hu-ymS" firstAttribute="top" secondItem="r5B-V9-Ae3" secondAttribute="top" id="Yis-mm-SAJ"/>
+                                            <constraint firstItem="cLx-hu-ymS" firstAttribute="leading" secondItem="r5B-V9-Ae3" secondAttribute="leading" id="bO5-rs-udt"/>
+                                            <constraint firstItem="nGd-fS-Q94" firstAttribute="centerY" secondItem="r5B-V9-Ae3" secondAttribute="centerY" id="psl-5G-eCL"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="nGd-fS-Q94" id="y9K-PY-r4f"/>
+                                            <outlet property="imageView" destination="cLx-hu-ymS" id="sHQ-vW-Chr"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="ET6-8a-Ui2" id="u3K-Zs-ggq"/>
+                                    <outlet property="delegate" destination="ET6-8a-Ui2" id="IV3-a4-0ry"/>
+                                </connections>
+                            </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fw-ef-dX1">
+                                <rect key="frame" x="233" y="329" width="135" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="iEW-LM-OTg" firstAttribute="top" secondItem="7Kh-EZ-9UR" secondAttribute="bottom" id="38c-52-OwF"/>
+                            <constraint firstItem="iEW-LM-OTg" firstAttribute="top" secondItem="1fw-ef-dX1" secondAttribute="bottom" constant="250" id="48F-cv-5so"/>
                             <constraint firstAttribute="trailing" secondItem="BaD-hM-sjD" secondAttribute="trailing" id="4bB-vK-Knt"/>
+                            <constraint firstItem="1fw-ef-dX1" firstAttribute="centerX" secondItem="Vye-dC-OCc" secondAttribute="centerX" id="80b-kv-h2h"/>
+                            <constraint firstAttribute="trailing" secondItem="7Kh-EZ-9UR" secondAttribute="trailing" id="DLb-Rt-Moi"/>
+                            <constraint firstItem="7Kh-EZ-9UR" firstAttribute="top" secondItem="BaD-hM-sjD" secondAttribute="bottom" id="DTS-V0-kMw"/>
+                            <constraint firstItem="7Kh-EZ-9UR" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="KaD-NW-bR9"/>
                             <constraint firstItem="BaD-hM-sjD" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="bbo-ko-V6D"/>
                             <constraint firstItem="BaD-hM-sjD" firstAttribute="top" secondItem="URQ-nn-7Gn" secondAttribute="bottom" id="z2a-99-1tl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="7Kh-EZ-9UR" id="Mh6-34-cnm"/>
+                        <outlet property="collectionViewFlowLayout" destination="3fq-G9-gsc" id="7gV-Ve-R62"/>
                         <outlet property="mapView" destination="BaD-hM-sjD" id="KlX-kg-Zo3"/>
+                        <outlet property="noImagesFoundLabel" destination="1fw-ef-dX1" id="kde-ao-UXr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Kh-oE-YqR" userLabel="First Responder" sceneMemberID="firstResponder"/>
