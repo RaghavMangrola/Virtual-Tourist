@@ -11,7 +11,7 @@ import MapKit
 import CoreData
 
 class PhotosViewController: UIViewController {
-
+  
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
@@ -20,6 +20,8 @@ class PhotosViewController: UIViewController {
   let flickrClientInstance = FlickrClient.sharedInstance
   let stack = CoreDataStack.sharedInstance
   
+  var insertedIndexCache: [NSIndexPath]!
+  
   var pin: Pin!
   var fetchedResultsController: NSFetchedResultsController!
   
@@ -27,7 +29,7 @@ class PhotosViewController: UIViewController {
     super.viewDidLoad()
     setupMapView()
     configureFlowLayout(view.frame.size.width)
-
+    
     if fetchPhotos().isEmpty {
       searchPhotos()
     }
@@ -131,4 +133,23 @@ extension PhotosViewController: UICollectionViewDataSource {
 
 extension PhotosViewController: NSFetchedResultsControllerDelegate {
   
+  func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    insertedIndexCache = [NSIndexPath]()
+  }
+  
+  func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+
+    switch type{
+    case .Insert:
+      insertedIndexCache.append(newIndexPath!)
+    default:
+      break
+    }
+  }
+  
+  func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    collectionView.performBatchUpdates({
+      self.collectionView.insertItemsAtIndexPaths(self.insertedIndexCache)
+    }, completion: nil)
+  }
 }
