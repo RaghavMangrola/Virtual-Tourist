@@ -108,6 +108,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     let photo = fetchedResultsController.objectAtIndexPath(indexPath) as! Photo
     
     let image = UIImage(named: "placeholder")
+    cell.activityIndicator.startAnimating()
     
     flickrClientInstance.downloadPhotofromURL(photo.imageURL!) { imageData, error in
       
@@ -121,6 +122,8 @@ extension PhotosViewController: UICollectionViewDataSource {
         
         if let updateCell = self.collectionView.cellForItemAtIndexPath(indexPath) as? PhotoViewCell {
           updateCell.imageView.image = downloadedImage
+          updateCell.activityIndicator.stopAnimating()
+          updateCell.activityIndicator.hidden = true
         }
       }
     }
