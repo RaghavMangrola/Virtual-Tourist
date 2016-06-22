@@ -8,12 +8,12 @@
 
 import UIKit
 import MapKit
+import CoreData
 
-class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDelegate {
+class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate {
   
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var editButton: UIBarButtonItem!
-  @IBOutlet weak var deleteLabel: UILabel!
   @IBOutlet weak var labelStackView: UIStackView!
   
   
@@ -22,6 +22,7 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
   }
   
   var editMode = false
+  let stack = CoreDataStack.sharedInstance
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -31,16 +32,20 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(TravelLocationsViewController.addPinToMap(_:)))
     lpgr.delegate = self
     self.mapView.addGestureRecognizer(lpgr)
+    
+    loadPinsFromDatabase()
   }
   
   func addPinToMap(gestureRecognizer: UILongPressGestureRecognizer) {
     if gestureRecognizer.state == UIGestureRecognizerState.Began && !editMode {
       let point = gestureRecognizer.locationInView(mapView)
       let coordinate = mapView.convertPoint(point, toCoordinateFromView: mapView)
+      let latitude = coordinate.latitude
+      let longitude = coordinate.longitude
       
-      let annotation = MKPointAnnotation()
-      annotation.coordinate = coordinate
+      let annotation = Pin(latitude: latitude, longitude: longitude, context: stack.context)
       mapView.addAnnotation(annotation)
+      stack.save()
     }
   }
   
@@ -52,11 +57,34 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     }
   }
   
+  func loadPinsFromDatabase() {
+    var pins = [Pin]()
+    let fetchRequest = NSFetchRequest(entityName: "Pin")
+    
+    do {
+      let results = try stack.context.executeFetchRequest(fetchRequest)
+      if let results = results as? [Pin] {
+        pins = results
+      }
+    } catch {
+      print("Couldn't find any Pins")
+    }
+    mapView.addAnnotations(pins)
+  }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "pinTapped" {
+      let photosVC = segue.destinationViewController as! PhotosViewController
+      let annotation = sender as! Pin
+      photosVC.pin = annotation
+      
+    }
+  }
 }
 
 // MARK: MKMapViewDelegate
 
-extension TravelLocationsViewController {
+extension TravelLocationsViewController: MKMapViewDelegate  {
   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
     let reuseId = "pin"
     
@@ -68,10 +96,16 @@ extension TravelLocationsViewController {
   }
   
   func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-    let annotation = view.annotation
+    let annotation = view.annotation as! Pin
     if editMode {
-      mapView.removeAnnotation(annotation!)
+      mapView.removeAnnotation(annotation)
+      stack.context.deleteObject(annotation)
+      stack.save()
+    } else {
+      mapView.deselectAnnotation(annotation, animated: false)
+      performSegueWithIdentifier("pinTapped", sender: annotation)
     }
   }
+  
 }
 
