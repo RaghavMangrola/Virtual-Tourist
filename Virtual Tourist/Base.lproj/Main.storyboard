@@ -123,16 +123,22 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cLx-hu-ymS">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nGd-fS-Q94">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="nGd-fS-Q94" firstAttribute="centerX" secondItem="r5B-V9-Ae3" secondAttribute="centerX" id="1Kp-vh-yL4"/>
                                             <constraint firstAttribute="trailing" secondItem="cLx-hu-ymS" secondAttribute="trailing" id="9i6-Js-TFa"/>
                                             <constraint firstAttribute="bottom" secondItem="cLx-hu-ymS" secondAttribute="bottom" id="Bqw-EU-CIg"/>
                                             <constraint firstItem="cLx-hu-ymS" firstAttribute="top" secondItem="r5B-V9-Ae3" secondAttribute="top" id="Yis-mm-SAJ"/>
                                             <constraint firstItem="cLx-hu-ymS" firstAttribute="leading" secondItem="r5B-V9-Ae3" secondAttribute="leading" id="bO5-rs-udt"/>
+                                            <constraint firstItem="nGd-fS-Q94" firstAttribute="centerY" secondItem="r5B-V9-Ae3" secondAttribute="centerY" id="psl-5G-eCL"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="nGd-fS-Q94" id="y9K-PY-r4f"/>
                                             <outlet property="imageView" destination="cLx-hu-ymS" id="sHQ-vW-Chr"/>
                                         </connections>
                                     </collectionViewCell>
