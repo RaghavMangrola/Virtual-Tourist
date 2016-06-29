@@ -158,7 +158,6 @@ extension TravelLocationsViewController: MKMapViewDelegate  {
     NSUserDefaults.standardUserDefaults().setValue(centerCoordinateLongitude, forKey: "centerCoordinateLongitude")
     NSUserDefaults.standardUserDefaults().setValue(altitude, forKey: "altitude")
     NSUserDefaults.standardUserDefaults().synchronize()
-    log.debug("\(NSUserDefaults.standardUserDefaults().synchronize())")
   }
   
 }
