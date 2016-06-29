@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreData
+import XCGLogger
 
 class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate {
   
@@ -23,6 +24,7 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
   
   var editMode = false
   let stack = CoreDataStack.sharedInstance
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
