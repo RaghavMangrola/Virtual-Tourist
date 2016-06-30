@@ -154,6 +154,18 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odL-3E-daR">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GzU-vH-2oP"/>
+                                    <barButtonItem title="Refresh Photos" id="KYy-ND-adQ">
+                                        <connections>
+                                            <action selector="toolbarButtonPressed:" destination="ET6-8a-Ui2" id="IdM-YC-fCl"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="nrG-fU-3QV"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -163,8 +175,11 @@
                             <constraint firstItem="1fw-ef-dX1" firstAttribute="centerX" secondItem="Vye-dC-OCc" secondAttribute="centerX" id="80b-kv-h2h"/>
                             <constraint firstAttribute="trailing" secondItem="7Kh-EZ-9UR" secondAttribute="trailing" id="DLb-Rt-Moi"/>
                             <constraint firstItem="7Kh-EZ-9UR" firstAttribute="top" secondItem="BaD-hM-sjD" secondAttribute="bottom" id="DTS-V0-kMw"/>
+                            <constraint firstItem="iEW-LM-OTg" firstAttribute="top" secondItem="odL-3E-daR" secondAttribute="bottom" id="IEX-Cl-muu"/>
                             <constraint firstItem="7Kh-EZ-9UR" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="KaD-NW-bR9"/>
+                            <constraint firstAttribute="trailing" secondItem="odL-3E-daR" secondAttribute="trailing" id="TO3-rM-4kp"/>
                             <constraint firstItem="BaD-hM-sjD" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="bbo-ko-V6D"/>
+                            <constraint firstItem="odL-3E-daR" firstAttribute="leading" secondItem="Vye-dC-OCc" secondAttribute="leading" id="uKy-wZ-64f"/>
                             <constraint firstItem="BaD-hM-sjD" firstAttribute="top" secondItem="URQ-nn-7Gn" secondAttribute="bottom" id="z2a-99-1tl"/>
                         </constraints>
                     </view>
@@ -173,6 +188,7 @@
                         <outlet property="collectionViewFlowLayout" destination="3fq-G9-gsc" id="7gV-Ve-R62"/>
                         <outlet property="mapView" destination="BaD-hM-sjD" id="KlX-kg-Zo3"/>
                         <outlet property="noImagesFoundLabel" destination="1fw-ef-dX1" id="kde-ao-UXr"/>
+                        <outlet property="toolbar" destination="odL-3E-daR" id="bb3-TT-GJd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Kh-oE-YqR" userLabel="First Responder" sceneMemberID="firstResponder"/>

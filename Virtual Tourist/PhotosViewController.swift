@@ -16,11 +16,18 @@ class PhotosViewController: UIViewController {
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
   @IBOutlet weak var noImagesFoundLabel: UILabel!
+  @IBOutlet weak var toolbar: UIToolbar!
+  
+  @IBAction func toolbarButtonPressed(sender: AnyObject) {
+    deletePhotos()
+    searchPhotos()
+  }
   
   let flickrClientInstance = FlickrClient.sharedInstance
   let stack = CoreDataStack.sharedInstance
   
   var insertedIndexCache: [NSIndexPath]!
+  var deletedIndexCache: [NSIndexPath]!
   
   var pin: Pin!
   var fetchedResultsController: NSFetchedResultsController!
@@ -32,6 +39,8 @@ class PhotosViewController: UIViewController {
     
     if fetchPhotos().isEmpty {
       searchPhotos()
+    } else {
+      toolbar.hidden = false
     }
   }
   
@@ -50,10 +59,10 @@ class PhotosViewController: UIViewController {
   func fetchPhotos() -> [Photo] {
     var photos = [Photo]()
     
-    let fr = NSFetchRequest(entityName: "Photo")
-    fr.sortDescriptors = []
-    fr.predicate = NSPredicate(format: "pin = %@", pin)
-    fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+    let fetchRequest = NSFetchRequest(entityName: "Photo")
+    fetchRequest.sortDescriptors = []
+    fetchRequest.predicate = NSPredicate(format: "pin = %@", pin)
+    fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
     fetchedResultsController.delegate = self
     
     do {
@@ -81,9 +90,17 @@ class PhotosViewController: UIViewController {
       for photoURL in photoURLS {
         let photo = Photo(imageURL: photoURL, context: self.stack.context)
         photo.pin = self.pin
+        self.toolbar.hidden = false
       }
       self.stack.save()
     }
+  }
+  
+  func deletePhotos() {
+    for photo in fetchedResultsController.fetchedObjects as! [Photo] {
+      stack.context.deleteObject(photo)
+    }
+    stack.save()
   }
 }
 
@@ -138,13 +155,17 @@ extension PhotosViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
     insertedIndexCache = [NSIndexPath]()
+    deletedIndexCache = [NSIndexPath]()
+    
   }
   
   func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
 
-    switch type{
+    switch type {
     case .Insert:
       insertedIndexCache.append(newIndexPath!)
+    case .Delete:
+      deletedIndexCache.append(indexPath!)
     default:
       break
     }
@@ -153,6 +174,8 @@ extension PhotosViewController: NSFetchedResultsControllerDelegate {
   func controllerDidChangeContent(controller: NSFetchedResultsController) {
     collectionView.performBatchUpdates({
       self.collectionView.insertItemsAtIndexPaths(self.insertedIndexCache)
+      self.collectionView.deleteItemsAtIndexPaths(self.deletedIndexCache)
+
     }, completion: nil)
   }
 }
