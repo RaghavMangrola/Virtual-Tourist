@@ -20,6 +20,7 @@ class FlickrClient: NSObject {
     parameters[ParameterKeys.APIKey] = APIKeys.flickr
     parameters[ParameterKeys.Format] = ParameterValues.ResponseFormat
     parameters[ParameterKeys.NoJSONCallback] = ParameterValues.DisableJSONCallback
+    parameters[ParameterKeys.PerPage] = ParameterValues.PhotosPerPage
     
     
     let request = NSMutableURLRequest(URL: flickrURLFromParameters(parameters))

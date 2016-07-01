@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreData
+import XCGLogger
 
 class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate {
   
@@ -20,9 +21,14 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
   @IBAction func editButtonPressed(sender: AnyObject) {
     editMap(editMode)
   }
-  
+  let className = "TravelLocationsViewController"
   var editMode = false
   let stack = CoreDataStack.sharedInstance
+  var centerCoordinate: CLLocationCoordinate2D?
+  var centerCoordinateLongitude: CLLocationDegrees?
+  var centerCoordinateLatitude: CLLocationDegrees?
+  var altitude: CLLocationDistance?
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -33,7 +39,9 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
     lpgr.delegate = self
     self.mapView.addGestureRecognizer(lpgr)
     
+    loadMapDefaults()
     loadPinsFromDatabase()
+
   }
   
   func addPinToMap(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -80,6 +88,26 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
       
     }
   }
+  
+  func loadMapDefaults() {
+    guard let centerCoordinateLatitude = NSUserDefaults.standardUserDefaults().valueForKey("centerCoordinateLatitude") as? CLLocationDegrees else {
+      log.warning("centerCoordinate not found in NSUserDefaults")
+      return
+    }
+    
+    guard let centerCoordinateLongitude = NSUserDefaults.standardUserDefaults().valueForKey("centerCoordinateLongitude") as? CLLocationDegrees else {
+      log.warning("centerCoordinate not found in NSUserDefaults")
+      return
+    }
+    
+    guard let altitude = NSUserDefaults.standardUserDefaults().valueForKey("altitude") as? CLLocationDistance else {
+      log.warning("altitude not found in NSUserDefaults")
+      return
+    }
+    
+    mapView.centerCoordinate = CLLocationCoordinate2DMake(centerCoordinateLatitude, centerCoordinateLongitude)
+    mapView.camera.altitude = altitude
+  }
 }
 
 // MARK: MKMapViewDelegate
@@ -105,6 +133,30 @@ extension TravelLocationsViewController: MKMapViewDelegate  {
       mapView.deselectAnnotation(annotation, animated: false)
       performSegueWithIdentifier("pinTapped", sender: annotation)
     }
+  }
+  
+  func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+    centerCoordinateLatitude = mapView.centerCoordinate.latitude
+    centerCoordinateLongitude = mapView.centerCoordinate.longitude
+    altitude = mapView.camera.altitude
+    
+    log.debug("Center Coordinate Latitude: \(centerCoordinateLatitude!)")
+    log.debug("Center Coordinate Longitude: \(centerCoordinateLongitude!)")
+    log.debug("Altitude: \(altitude!)")
+  }
+  
+  func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    centerCoordinateLatitude = mapView.centerCoordinate.latitude
+    centerCoordinateLongitude = mapView.centerCoordinate.longitude
+    altitude = mapView.camera.altitude
+    
+    log.debug("Center Coordinate Latitude: \(centerCoordinateLatitude!)")
+    log.debug("Center Coordinate Longitude: \(centerCoordinateLongitude!)")
+    log.debug("Altitude: \(altitude!)")
+    
+    NSUserDefaults.standardUserDefaults().setValue(centerCoordinateLatitude, forKey: "centerCoordinateLatitude")
+    NSUserDefaults.standardUserDefaults().setValue(centerCoordinateLongitude, forKey: "centerCoordinateLongitude")
+    NSUserDefaults.standardUserDefaults().setValue(altitude, forKey: "altitude")
   }
   
 }

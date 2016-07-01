@@ -16,11 +16,29 @@ class PhotosViewController: UIViewController {
   @IBOutlet weak var collectionView: UICollectionView!
   @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
   @IBOutlet weak var noImagesFoundLabel: UILabel!
+  @IBOutlet weak var toolbar: UIToolbar!
+  @IBOutlet weak var toolbarButton: UIBarButtonItem!
+  
+  @IBAction func toolbarButtonPressed(sender: AnyObject) {
+    if selectedPhotos.isEmpty {
+      deletePhotos()
+      searchPhotos()
+    } else {
+      deleteSelectedPhotos()
+    }
+  }
   
   let flickrClientInstance = FlickrClient.sharedInstance
   let stack = CoreDataStack.sharedInstance
   
   var insertedIndexCache: [NSIndexPath]!
+  var deletedIndexCache: [NSIndexPath]!
+  
+  var selectedPhotos = [NSIndexPath]() {
+    didSet {
+      toolbarButton.title = selectedPhotos.isEmpty ? "New Collection" : "Remove Selected Pictures"
+    }
+  }
   
   var pin: Pin!
   var fetchedResultsController: NSFetchedResultsController!
@@ -32,6 +50,8 @@ class PhotosViewController: UIViewController {
     
     if fetchPhotos().isEmpty {
       searchPhotos()
+    } else {
+      toolbar.hidden = false
     }
   }
   
@@ -50,10 +70,10 @@ class PhotosViewController: UIViewController {
   func fetchPhotos() -> [Photo] {
     var photos = [Photo]()
     
-    let fr = NSFetchRequest(entityName: "Photo")
-    fr.sortDescriptors = []
-    fr.predicate = NSPredicate(format: "pin = %@", pin)
-    fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+    let fetchRequest = NSFetchRequest(entityName: "Photo")
+    fetchRequest.sortDescriptors = []
+    fetchRequest.predicate = NSPredicate(format: "pin = %@", pin)
+    fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
     fetchedResultsController.delegate = self
     
     do {
@@ -81,11 +101,36 @@ class PhotosViewController: UIViewController {
       for photoURL in photoURLS {
         let photo = Photo(imageURL: photoURL, context: self.stack.context)
         photo.pin = self.pin
+        self.toolbar.hidden = false
       }
       self.stack.save()
     }
   }
+  
+  func deleteSelectedPhotos() {
+    var photosToDelete = [Photo]()
+    
+    for indexPath in selectedPhotos {
+      photosToDelete.append(fetchedResultsController.objectAtIndexPath(indexPath) as! Photo)
+    }
+    
+    for photo in photosToDelete {
+      stack.context.deleteObject(photo)
+    }
+    stack.save()
+    
+    selectedPhotos = []
+  }
+  
+  func deletePhotos() {
+    for photo in fetchedResultsController.fetchedObjects as! [Photo] {
+      stack.context.deleteObject(photo)
+    }
+    stack.save()
+  }
 }
+
+// MARK: MKMapViewDelegate
 
 extension PhotosViewController: MKMapViewDelegate {
   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -97,6 +142,32 @@ extension PhotosViewController: MKMapViewDelegate {
     return pinView
   }
 }
+
+extension PhotosViewController: UICollectionViewDelegate {
+  
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoViewCell
+    
+    if let index = selectedPhotos.indexOf(indexPath) {
+      selectedPhotos.removeAtIndex(index)
+    } else {
+      selectedPhotos.append(indexPath)
+    }
+    
+    configureCellSection(cell, indexPath: indexPath)
+    
+  }
+
+  func configureCellSection(cell: PhotoViewCell, indexPath: NSIndexPath) {
+    if let _ = selectedPhotos.indexOf(indexPath){
+      cell.alpha = 0.5
+    } else {
+      cell.alpha = 1.0
+    }
+  }
+}
+
+// MARK: UICollectionViewDataSource
 
 extension PhotosViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -129,22 +200,29 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
     cell.imageView.image = image
+    configureCellSection(cell, indexPath: indexPath)
     
     return cell
   }
 }
 
+// MARK: NSFetchedResultsControllerDelegate
+
 extension PhotosViewController: NSFetchedResultsControllerDelegate {
   
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
     insertedIndexCache = [NSIndexPath]()
+    deletedIndexCache = [NSIndexPath]()
+    
   }
   
   func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
 
-    switch type{
+    switch type {
     case .Insert:
       insertedIndexCache.append(newIndexPath!)
+    case .Delete:
+      deletedIndexCache.append(indexPath!)
     default:
       break
     }
@@ -153,6 +231,8 @@ extension PhotosViewController: NSFetchedResultsControllerDelegate {
   func controllerDidChangeContent(controller: NSFetchedResultsController) {
     collectionView.performBatchUpdates({
       self.collectionView.insertItemsAtIndexPaths(self.insertedIndexCache)
+      self.collectionView.deleteItemsAtIndexPaths(self.deletedIndexCache)
+
     }, completion: nil)
   }
 }
