@@ -29,6 +29,8 @@ class PhotosViewController: UIViewController {
   var insertedIndexCache: [NSIndexPath]!
   var deletedIndexCache: [NSIndexPath]!
   
+  var selectedPhotos = [NSIndexPath]()
+  
   var pin: Pin!
   var fetchedResultsController: NSFetchedResultsController!
   
@@ -104,6 +106,8 @@ class PhotosViewController: UIViewController {
   }
 }
 
+// MARK: MKMapViewDelegate
+
 extension PhotosViewController: MKMapViewDelegate {
   func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
     let reuseId = "pin"
@@ -114,6 +118,32 @@ extension PhotosViewController: MKMapViewDelegate {
     return pinView
   }
 }
+
+extension PhotosViewController: UICollectionViewDelegate {
+  
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PhotoViewCell
+    
+    if let index = selectedPhotos.indexOf(indexPath) {
+      selectedPhotos.removeAtIndex(index)
+    } else {
+      selectedPhotos.append(indexPath)
+    }
+    
+    configureCellSection(cell, indexPath: indexPath)
+    
+  }
+
+  func configureCellSection(cell: PhotoViewCell, indexPath: NSIndexPath) {
+    if let _ = selectedPhotos.indexOf(indexPath){
+      cell.alpha = 0.5
+    } else {
+      cell.alpha = 1.0
+    }
+  }
+}
+
+// MARK: UICollectionViewDataSource
 
 extension PhotosViewController: UICollectionViewDataSource {
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -146,10 +176,13 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
     cell.imageView.image = image
+    configureCellSection(cell, indexPath: indexPath)
     
     return cell
   }
 }
+
+// MARK: NSFetchedResultsControllerDelegate
 
 extension PhotosViewController: NSFetchedResultsControllerDelegate {
   
