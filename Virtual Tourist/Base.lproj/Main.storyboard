@@ -189,6 +189,7 @@
                         <outlet property="mapView" destination="BaD-hM-sjD" id="KlX-kg-Zo3"/>
                         <outlet property="noImagesFoundLabel" destination="1fw-ef-dX1" id="kde-ao-UXr"/>
                         <outlet property="toolbar" destination="odL-3E-daR" id="bb3-TT-GJd"/>
+                        <outlet property="toolbarButton" destination="KYy-ND-adQ" id="aCP-k9-0VK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Kh-oE-YqR" userLabel="First Responder" sceneMemberID="firstResponder"/>

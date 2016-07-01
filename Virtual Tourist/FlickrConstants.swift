@@ -27,12 +27,14 @@ extension FlickrClient {
     static let Method = "method"
     static let Format = "format"
     static let NoJSONCallback = "nojsoncallback"
+    static let PerPage = "per_page"
   }
   
   struct ParameterValues {
     static let MediumURL = "url_m"
     static let ResponseFormat = "json"
     static let DisableJSONCallback = "1"
+    static let PhotosPerPage = "25"
   }
   
   struct APIKeys {

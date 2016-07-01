@@ -17,10 +17,15 @@ class PhotosViewController: UIViewController {
   @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
   @IBOutlet weak var noImagesFoundLabel: UILabel!
   @IBOutlet weak var toolbar: UIToolbar!
+  @IBOutlet weak var toolbarButton: UIBarButtonItem!
   
   @IBAction func toolbarButtonPressed(sender: AnyObject) {
-    deletePhotos()
-    searchPhotos()
+    if selectedPhotos.isEmpty {
+      deletePhotos()
+      searchPhotos()
+    } else {
+      deleteSelectedPhotos()
+    }
   }
   
   let flickrClientInstance = FlickrClient.sharedInstance
@@ -29,7 +34,11 @@ class PhotosViewController: UIViewController {
   var insertedIndexCache: [NSIndexPath]!
   var deletedIndexCache: [NSIndexPath]!
   
-  var selectedPhotos = [NSIndexPath]()
+  var selectedPhotos = [NSIndexPath]() {
+    didSet {
+      toolbarButton.title = selectedPhotos.isEmpty ? "New Collection" : "Remove Selected Pictures"
+    }
+  }
   
   var pin: Pin!
   var fetchedResultsController: NSFetchedResultsController!
@@ -96,6 +105,21 @@ class PhotosViewController: UIViewController {
       }
       self.stack.save()
     }
+  }
+  
+  func deleteSelectedPhotos() {
+    var photosToDelete = [Photo]()
+    
+    for indexPath in selectedPhotos {
+      photosToDelete.append(fetchedResultsController.objectAtIndexPath(indexPath) as! Photo)
+    }
+    
+    for photo in photosToDelete {
+      stack.context.deleteObject(photo)
+    }
+    stack.save()
+    
+    selectedPhotos = []
   }
   
   func deletePhotos() {
