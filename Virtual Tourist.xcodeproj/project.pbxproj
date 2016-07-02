@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04E86D2FB6DDF9CAEE77FD1C /* Pods_Virtual_Tourist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF98A07F23B9C2A18A493F7 /* Pods_Virtual_Tourist.framework */; };
 		A0350CAE1D15B7D7001723BE /* FlickrClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0350CAD1D15B7D7001723BE /* FlickrClient.swift */; };
 		A0350CB01D15B807001723BE /* FlickrConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0350CAF1D15B807001723BE /* FlickrConvenience.swift */; };
 		A0350CB21D15B815001723BE /* FlickrConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0350CB11D15B815001723BE /* FlickrConstants.swift */; };
@@ -24,26 +23,9 @@
 		A0E7189D1D134DF300679FD4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0E7189B1D134DF300679FD4 /* Model.xcdatamodeld */; };
 		A0E718A41D134E9200679FD4 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E718A21D134E9200679FD4 /* Pin+CoreDataProperties.swift */; };
 		A0E718A51D134E9200679FD4 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E718A31D134E9200679FD4 /* Pin.swift */; };
-		A0FAC2531D2349A9001A9943 /* XCGLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FAC2521D2349A9001A9943 /* XCGLogger.framework */; };
-		A0FAC2541D2349A9001A9943 /* XCGLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A0FAC2521D2349A9001A9943 /* XCGLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		A0FAC2551D2349A9001A9943 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				A0FAC2541D2349A9001A9943 /* XCGLogger.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		8017EEF7FEAB31C9F0C75214 /* Pods-Virtual Tourist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Virtual Tourist.release.xcconfig"; path = "Pods/Target Support Files/Pods-Virtual Tourist/Pods-Virtual Tourist.release.xcconfig"; sourceTree = "<group>"; };
 		A0350CAD1D15B7D7001723BE /* FlickrClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrClient.swift; sourceTree = "<group>"; };
 		A0350CAF1D15B807001723BE /* FlickrConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConvenience.swift; sourceTree = "<group>"; };
 		A0350CB11D15B815001723BE /* FlickrConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrConstants.swift; sourceTree = "<group>"; };
@@ -62,9 +44,6 @@
 		A0E7189C1D134DF300679FD4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		A0E718A21D134E9200679FD4 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Pin+CoreDataProperties.swift"; path = "../Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A0E718A31D134E9200679FD4 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pin.swift; path = ../Pin.swift; sourceTree = "<group>"; };
-		A0FAC2521D2349A9001A9943 /* XCGLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = XCGLogger.framework; path = "/Users/Raghav/Library/Developer/Xcode/DerivedData/Virtual_Tourist-fnacaftuzoxelsbsfaeadtxaowbf/Build/Products/Debug-iphonesimulator/XCGLogger/XCGLogger.framework"; sourceTree = "<absolute>"; };
-		E58881E67E72AAB76101B7FF /* Pods-Virtual Tourist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Virtual Tourist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Virtual Tourist/Pods-Virtual Tourist.debug.xcconfig"; sourceTree = "<group>"; };
-		FAF98A07F23B9C2A18A493F7 /* Pods_Virtual_Tourist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Virtual_Tourist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,23 +51,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04E86D2FB6DDF9CAEE77FD1C /* Pods_Virtual_Tourist.framework in Frameworks */,
-				A0FAC2531D2349A9001A9943 /* XCGLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8AA6A3997D0C2753D88E5DE3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				E58881E67E72AAB76101B7FF /* Pods-Virtual Tourist.debug.xcconfig */,
-				8017EEF7FEAB31C9F0C75214 /* Pods-Virtual Tourist.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		A03A13A11D1392E20042824E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,11 +87,8 @@
 		A0B9399D1D0356930063A7E3 = {
 			isa = PBXGroup;
 			children = (
-				A0FAC2521D2349A9001A9943 /* XCGLogger.framework */,
 				A0B939A81D0356930063A7E3 /* Virtual Tourist */,
 				A0B939A71D0356930063A7E3 /* Products */,
-				8AA6A3997D0C2753D88E5DE3 /* Pods */,
-				A1763C1E6A985800AC55A08F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,14 +129,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		A1763C1E6A985800AC55A08F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FAF98A07F23B9C2A18A493F7 /* Pods_Virtual_Tourist.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -179,13 +136,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0B939B81D0356930063A7E3 /* Build configuration list for PBXNativeTarget "Virtual Tourist" */;
 			buildPhases = (
-				6938D1C99C7130C88AF8CCE3 /* 📦 Check Pods Manifest.lock */,
 				A0B939A21D0356930063A7E3 /* Sources */,
 				A0B939A31D0356930063A7E3 /* Frameworks */,
 				A0B939A41D0356930063A7E3 /* Resources */,
-				52351925B6303BF9EEFD3BAB /* 📦 Embed Pods Frameworks */,
-				F16A498D755A767AD7854174 /* 📦 Copy Pods Resources */,
-				A0FAC2551D2349A9001A9943 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,54 +194,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		52351925B6303BF9EEFD3BAB /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Virtual Tourist/Pods-Virtual Tourist-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6938D1C99C7130C88AF8CCE3 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F16A498D755A767AD7854174 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Virtual Tourist/Pods-Virtual Tourist-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A0B939A21D0356930063A7E3 /* Sources */ = {
@@ -418,7 +323,6 @@
 		};
 		A0B939B91D0356930063A7E3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E58881E67E72AAB76101B7FF /* Pods-Virtual Tourist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Virtual Tourist/Info.plist";
@@ -430,7 +334,6 @@
 		};
 		A0B939BA1D0356930063A7E3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8017EEF7FEAB31C9F0C75214 /* Pods-Virtual Tourist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Virtual Tourist/Info.plist";

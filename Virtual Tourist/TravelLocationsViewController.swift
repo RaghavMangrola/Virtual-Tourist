@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 import CoreData
-import XCGLogger
+
 
 class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelegate {
   
@@ -91,17 +91,14 @@ class TravelLocationsViewController: UIViewController, UIGestureRecognizerDelega
   
   func loadMapDefaults() {
     guard let centerCoordinateLatitude = NSUserDefaults.standardUserDefaults().valueForKey("centerCoordinateLatitude") as? CLLocationDegrees else {
-      log.warning("centerCoordinate not found in NSUserDefaults")
       return
     }
     
     guard let centerCoordinateLongitude = NSUserDefaults.standardUserDefaults().valueForKey("centerCoordinateLongitude") as? CLLocationDegrees else {
-      log.warning("centerCoordinate not found in NSUserDefaults")
       return
     }
     
     guard let altitude = NSUserDefaults.standardUserDefaults().valueForKey("altitude") as? CLLocationDistance else {
-      log.warning("altitude not found in NSUserDefaults")
       return
     }
     
@@ -140,9 +137,7 @@ extension TravelLocationsViewController: MKMapViewDelegate  {
     centerCoordinateLongitude = mapView.centerCoordinate.longitude
     altitude = mapView.camera.altitude
     
-    log.debug("Center Coordinate Latitude: \(centerCoordinateLatitude!)")
-    log.debug("Center Coordinate Longitude: \(centerCoordinateLongitude!)")
-    log.debug("Altitude: \(altitude!)")
+
   }
   
   func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -150,9 +145,7 @@ extension TravelLocationsViewController: MKMapViewDelegate  {
     centerCoordinateLongitude = mapView.centerCoordinate.longitude
     altitude = mapView.camera.altitude
     
-    log.debug("Center Coordinate Latitude: \(centerCoordinateLatitude!)")
-    log.debug("Center Coordinate Longitude: \(centerCoordinateLongitude!)")
-    log.debug("Altitude: \(altitude!)")
+
     
     NSUserDefaults.standardUserDefaults().setValue(centerCoordinateLatitude, forKey: "centerCoordinateLatitude")
     NSUserDefaults.standardUserDefaults().setValue(centerCoordinateLongitude, forKey: "centerCoordinateLongitude")
